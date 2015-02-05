@@ -4,9 +4,9 @@ import cv2
 import numpy as np
 import sys
 
-def halfTone(path,r=5):
-	d = 2*r
-	img = cv2.imread(path,0)
+def halfTone(img,r=5):
+	"A very simple halftone implementation based on sampling"
+	d = 2*r	
 	height,width = img.shape
 	x = [i*d+r for i in range(width/d)]
 	y = [j*d+r for j in range(height/d)]
@@ -17,6 +17,7 @@ def halfTone(path,r=5):
 			cv2.circle(hTone, (j,i), rad, 255,-1,8)
 	return hTone
 def display(img,maxWidth=1280,maxHeight=720):
+	"Display function"
 	height,width = img.shape
 	winHeight = height
 	winWidth = width
@@ -34,9 +35,10 @@ def display(img,maxWidth=1280,maxHeight=720):
 
 if __name__ == '__main__':
 	try: path = sys.argv[1]
-	except: path = './DataSet/image1.jpg'
-	img = halfTone(path)
-	display(img)
+	except: path = './DataSet/image2.jpg'
+	img = cv2.imread(path,0)
+	htone = halfTone(img)
+	display(htone)
 
 
 
