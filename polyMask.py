@@ -1,5 +1,19 @@
 import cv2
 import numpy as np
+'''
+Simple Convex PolyGon Mask creation tool
+
+Usage: use mouse select the polygon points
+Keys:
+  c|C     - Create a mask from the current set of polygon points
+  n|N 	  - A new convex polygon mask along side the current one. 
+  			(after creation of one mask if this is not done 
+  				new set of points will be considered as part of the old one )
+			(new also acts as commit for using undo)
+  u|U 	  - Undo
+  e|E 	  - Eraser tool (size 10) 
+  ESC   - exit
+'''
 def draw_mask(event,x,y,flags,param):
     global ix,iy,drawing,pts,draw,mask,erase,size
     
@@ -88,7 +102,11 @@ count = 0
 masks = []
 size = 10
 if __name__=='__main__':
-	orig = cv2.imread('./DataSet/text.png')	
+	import sys
+	try: path = sys.argv[1]
+	except: path = './DataSet/text.png'
+	print __doc__
+	orig = cv2.imread(path)
 	h,w,_ = orig.shape	
 	draw = np.zeros((h,w),np.uint8)
 	mask = np.zeros((h,w),np.uint8)	
