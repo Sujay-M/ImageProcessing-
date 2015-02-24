@@ -35,7 +35,7 @@ def display(img,maxWidth=1280,maxHeight=720):
 
 if __name__ == '__main__':
 	try: path = sys.argv[1]
-	except: path = './DataSet/image2.jpg'
+	except: path = './DataSet/image3.jpg'
 	img = cv2.imread(path,0)
 	htone = halfTone(img)
 	display(htone)
